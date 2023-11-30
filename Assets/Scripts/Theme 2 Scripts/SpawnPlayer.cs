@@ -48,9 +48,9 @@ public class SpawnPlayer : MonoBehaviour
         sp.StartCoroutine(sp.RespawnPlayer1());
     }
 
-    public static void DestroyPlayer2(PlayerController2 player2)
+    /*public static void DestroyPlayer2(PlayerController2 player2)
     {
         Destroy(player2.gameObject);
         sp.StartCoroutine(sp.RespawnPlayer2());
-    }
+    }*/
 }

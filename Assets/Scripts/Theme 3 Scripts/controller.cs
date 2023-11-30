@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(wheelsManager))]
 [RequireComponent(typeof(engineAudio))]
-[RequireComponent(typeof(inputManager))]
+[RequireComponent(typeof(inputManagerCar))]
 
 public class controller : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class controller : MonoBehaviour
 
     //scripts ->
     private engineAudio audio;
-    private inputManager IM;
+    private inputManagerCar IM;
     private wheelsManager wheelsmanager;
 
     //components
@@ -303,7 +303,7 @@ public class controller : MonoBehaviour
    
     private void getObjects()
     {
-        IM = GetComponent<inputManager>();
+        IM = GetComponent<inputManagerCar>();
         rigidbody = GetComponent<Rigidbody>();
         audio = GetComponent<engineAudio>();
         wheelsmanager = GetComponent<wheelsManager>();

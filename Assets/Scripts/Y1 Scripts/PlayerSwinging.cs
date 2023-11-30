@@ -8,7 +8,7 @@ public class PlayerSwinging : MonoBehaviour
     [SerializeField] private Transform cameraObject;
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask swingSurface;
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerMovementOld playerMovement;
 
     [Header("Swinging")]
     [SerializeField] private float maxSwingDistance;

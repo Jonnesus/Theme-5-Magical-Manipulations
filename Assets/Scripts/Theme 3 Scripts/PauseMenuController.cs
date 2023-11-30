@@ -10,11 +10,11 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject resumeButton;
 
-    private inputManager IM;
+    private inputManagerCar IM;
 
     private void Start()
     {
-        IM = GetComponent<inputManager>();
+        IM = GetComponent<inputManagerCar>();
     }
 
     private void Update()
