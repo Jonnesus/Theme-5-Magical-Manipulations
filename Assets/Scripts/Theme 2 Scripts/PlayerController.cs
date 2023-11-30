@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour, IPlayerController
     public Vector3 RawMovement { get; private set; }
     public bool Grounded => _colDown;
 
+    private InputManager IM;
+
     private Vector3 _lastPosition;
     private float _currentHorizontalSpeed, _currentVerticalSpeed;
     private bool facingRight = true;
@@ -19,6 +21,11 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private bool _active;
     void Awake() => Invoke(nameof(Activate), 0.5f);
     void Activate() => _active = true;
+
+    private void Start()
+    {
+        IM = GetComponent<InputManager>();
+    }
 
     private void Update()
     {
@@ -38,16 +45,15 @@ public class PlayerController : MonoBehaviour, IPlayerController
         MoveCharacter(); // Perform the axis movement
     }
 
-
     #region Gather Input
 
     private void GatherInput()
     {
         Input = new FrameInput
         {
-            JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-            JumpUp = UnityEngine.Input.GetButtonUp("Jump"),
-            X = UnityEngine.Input.GetAxisRaw("Horizontal")
+            JumpDown = IM.jump,
+            JumpUp = IM.jump,
+            X = IM.move.x,
         };
         if (Input.JumpDown)
         {
@@ -147,7 +153,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     }
 
     #endregion
-
 
     #region Walk
 
