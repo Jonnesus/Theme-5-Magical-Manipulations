@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-    public class PlayerAnimator : MonoBehaviour {
+    public class OldPlayerAnimator : MonoBehaviour {
         [SerializeField] private Animator _anim;
         [SerializeField] private AudioSource _source;
         [SerializeField] private LayerMask _groundMask;
@@ -13,12 +13,12 @@ using Random = UnityEngine.Random;
         [SerializeField, Range(1f, 3f)] private float _maxIdleSpeed = 2;
         [SerializeField] private float _maxParticleFallSpeed = -40;
 
-        private IPlayerController _player;
+        private OldIPlayerController _player;
         private bool _playerGrounded;
         private ParticleSystem.MinMaxGradient _currentGradient;
         private Vector2 _movement;
 
-        void Awake() => _player = GetComponentInParent<IPlayerController>();
+        void Awake() => _player = GetComponentInParent<OldIPlayerController>();
 
         void Update() {
             if (_player == null) return;

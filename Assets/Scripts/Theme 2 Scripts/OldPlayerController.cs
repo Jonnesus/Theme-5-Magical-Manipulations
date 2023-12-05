@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IPlayerController
+public class OldPlayerController : MonoBehaviour, OldIPlayerController
 {
     public Vector3 Velocity { get; private set; }
-    public FrameInput Input { get; private set; }
+    public OldFrameInput Input { get; private set; }
     public bool JumpingThisFrame { get; private set; }
     public bool LandingThisFrame { get; private set; }
     public Vector3 RawMovement { get; private set; }
@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private Vector3 _lastPosition;
     private float _currentHorizontalSpeed, _currentVerticalSpeed;
     private bool facingRight = true;
-    private int health = 100;
 
     private bool _active;
     void Awake() => Invoke(nameof(Activate), 0.5f);
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void GatherInput()
     {
-        Input = new FrameInput
+        Input = new OldFrameInput
         {
             JumpDown = IM.jump,
             JumpUp = IM.jump,
@@ -71,7 +70,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     [SerializeField] private float _detectionRayLength = 0.1f;
     [SerializeField][Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
 
-    private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
+    private OldRayRange _raysUp, _raysRight, _raysDown, _raysLeft;
     private bool _colUp, _colRight, _colDown, _colLeft;
 
     private float _timeLeftGrounded;
@@ -98,7 +97,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _colLeft = RunDetection(_raysLeft);
         _colRight = RunDetection(_raysRight);
 
-        bool RunDetection(RayRange range)
+        bool RunDetection(OldRayRange range)
         {
             return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, _groundLayer));
         }
@@ -108,14 +107,14 @@ public class PlayerController : MonoBehaviour, IPlayerController
     {
         var b = new Bounds(transform.position, _characterBounds.size);
 
-        _raysDown = new RayRange(b.min.x + _rayBuffer, b.min.y, b.max.x - _rayBuffer, b.min.y, Vector2.down);
-        _raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
-        _raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
-        _raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
+        _raysDown = new OldRayRange(b.min.x + _rayBuffer, b.min.y, b.max.x - _rayBuffer, b.min.y, Vector2.down);
+        _raysUp = new OldRayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
+        _raysLeft = new OldRayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
+        _raysRight = new OldRayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
     }
 
 
-    private IEnumerable<Vector2> EvaluateRayPositions(RayRange range)
+    private IEnumerable<Vector2> EvaluateRayPositions(OldRayRange range)
     {
         for (var i = 0; i < _detectorCount; i++)
         {
@@ -135,7 +134,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         {
             CalculateRayRanged();
             Gizmos.color = Color.blue;
-            foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysDown, _raysLeft })
+            foreach (var range in new List<OldRayRange> { _raysUp, _raysRight, _raysDown, _raysLeft })
             {
                 foreach (var point in EvaluateRayPositions(range))
                 {
@@ -276,7 +275,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         }
 
         // End the jump early if button released
-        if (!_colDown && Input.JumpUp && !_endedJumpEarly && Velocity.y > 0)
+        if (!_colDown && !Input.JumpUp && !_endedJumpEarly && Velocity.y > 0)
         {
             // _currentVerticalSpeed = 0;
             _endedJumpEarly = true;
@@ -340,13 +339,4 @@ public class PlayerController : MonoBehaviour, IPlayerController
     }
 
     #endregion
-
-    public void DamagePlayer(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            SpawnPlayer.DestroyPlayer1(this);
-        }
-    }
 }
