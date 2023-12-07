@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        currentTimeText.text = "Time Survived: " + currentTime.ToString("F2");
+        currentTimeText.text = "Time: " + currentTime.ToString("F2");
 
         if (startTimer == true)
         {

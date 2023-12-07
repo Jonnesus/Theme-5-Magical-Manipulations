@@ -2,23 +2,28 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20f;
-    public int damage = 20;
-    public Rigidbody2D rb;
+    [SerializeField] private float speed = 20f;
+    private Rigidbody2D rb;
+
+    System.Random random = new System.Random();
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
+        transform.rotation = Quaternion.Euler(0,0,90);
     }
 
-    void OnTriggerEnter2D(Collider2D hitInfo)
+    void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
+        Enemy enemy = hitInfo.collider.GetComponent<Enemy>();
 
         if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+            enemy.TakeDamage(random.Next(5,15));
+
+        if (hitInfo.gameObject.tag == "Button")
+            Debug.Log("Button Hit");
+
         Destroy(gameObject);
     }
 }

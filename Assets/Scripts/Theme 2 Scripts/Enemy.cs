@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 100;
+    [SerializeField] private float health = 100f;
 
-    public void TakeDamage (int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 
@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Die ()
+    private void Die()
     {
         Destroy(gameObject);
     }

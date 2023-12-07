@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private float damage = 10f;
     [SerializeField] private float fireRate = 15f;
-    [SerializeField] private float range = 100f;
+
+    [SerializeField] private GameObject firePoint;
+    [SerializeField] private GameObject bulletPrefab;
 
     private float nextFire = 0f;
-
-    [SerializeField] private Camera fpsCam;
-    [SerializeField] private ParticleSystem muzzleFlash;
 
     private InputManager IM;
 
@@ -22,7 +20,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
-        if (IM.fire == true && Time.time >= nextFire)
+        if (IM.fire && Time.time >= nextFire)
         {
             nextFire = Time.time + 1f / fireRate;
             Shoot();
@@ -31,17 +29,6 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        muzzleFlash.Play();
-
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
-            EnemyTakeDamage target = hit.transform.GetComponent<EnemyTakeDamage>();
-
-            if (target != null)
-            {
-                target.TakeDamage(damage);
-            }
-        }
+        Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
     }
 }

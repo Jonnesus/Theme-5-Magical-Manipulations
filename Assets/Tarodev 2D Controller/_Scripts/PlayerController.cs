@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IPlayerController
 {
     [SerializeField] private ScriptableStats stats;
+    [SerializeField] private GameObject firePoint;
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
     private InputManager IM;
     private FrameInput frameInput;
     private Vector2 frameVelocity;
     private bool cachedQueryStartInColliders;
+    private bool facingRight = true;
 
     #region Interface
 
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         HandleGravity();
 
         ApplyMovement();
+        FlipCheck();
     }
 
     #region Collisions
@@ -183,6 +186,20 @@ public class PlayerController : MonoBehaviour, IPlayerController
     #endregion
 
     private void ApplyMovement() => rb.velocity = frameVelocity;
+
+    private void FlipCheck()
+    {
+        if (frameInput.Move.x < 0 && facingRight)
+        {
+            facingRight = false;
+            firePoint.transform.Rotate(0, 180, 0);
+        }
+        else if (frameInput.Move.x > 0 && !facingRight)
+        {
+            facingRight = true;
+            firePoint.transform.Rotate(0, 180, 0);
+        }
+    }
 }
 
 public struct FrameInput
