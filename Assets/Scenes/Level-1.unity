@@ -980,10 +980,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1544650614272011804, guid: 88097b566ad1fdd489d7ee77465b57aa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1165862692}
+      addedObject: {fileID: 1165862694}
     - targetCorrespondingSourceObject: {fileID: 1544650614272011804, guid: 88097b566ad1fdd489d7ee77465b57aa, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1165862694}
+      addedObject: {fileID: 1165862692}
     - targetCorrespondingSourceObject: {fileID: 1544650614272011804, guid: 88097b566ad1fdd489d7ee77465b57aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1165862693}
@@ -1908,6 +1908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   fire: 0
+  fire2: 0
   jump: 0
   sprint: 0
   crouch: 0
@@ -2199,9 +2200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df84079f7e6a6e5488cf74b4b4feb323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  fireRateSmall: 10
+  fireRateBig: 1
   firePoint: {fileID: 1897192374}
   bulletPrefab: {fileID: 3280450461688791270, guid: d9ded0f82c269c64bb280a0494dedb7f, type: 3}
+  bigBulletPrefab: {fileID: 2365903979853708703, guid: 29b3b149c0a15e744a447a1d8f69ce95, type: 3}
 --- !u!114 &1165862693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,7 +2560,7 @@ GameObject:
   - component: {fileID: 1558297350}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2711,10 +2714,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1558297344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7727bbc522aa2468e5f11bb5b87f55, type: 3}
+  m_Script: {fileID: 11500000, guid: b9a5afc4022f19742910ea76e9f450ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
 --- !u!114 &1581088173 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6865420263278600425, guid: 454010d09f63d4a4aaf9a2a9be4db28c, type: 3}

@@ -7,7 +7,7 @@ public class cameraController : MonoBehaviour
     private GameObject atachedVehicle;
     private int locationIndicator = 1;
     private controller controllerRef;
-    private Camera camera;
+    private Camera cameraCar;
 
     private float bias;
     private float smoothTime = .5f;
@@ -32,7 +32,7 @@ public class cameraController : MonoBehaviour
         cameraPos[2] = new Vector2(8.5f,0.75f);
         cameraPos[3] = new Vector2(10f,1f);
 
-        camera = gameObject.GetComponent<Camera>();
+        cameraCar = gameObject.GetComponent<Camera>();
         atachedVehicle = GameObject.FindGameObjectWithTag("Player");
 
         focusPoint = atachedVehicle.transform.Find("focus").gameObject;
@@ -49,8 +49,8 @@ public class cameraController : MonoBehaviour
 
         controllerRef = atachedVehicle.GetComponent<controller>();
 
-        camera.usePhysicalProperties = true;
-        camera.fieldOfView = fieldOfView;
+        cameraCar.usePhysicalProperties = true;
+        cameraCar.fieldOfView = fieldOfView;
     }
 
     void FixedUpdate()
@@ -66,7 +66,7 @@ public class cameraController : MonoBehaviour
             {
                 transform.position = driverPoint.transform.position;
                 transform.rotation = driverPoint.transform.rotation;
-                camera.fieldOfView = 80;
+                cameraCar.fieldOfView = 80;
             }
         }
     }
@@ -90,7 +90,7 @@ public class cameraController : MonoBehaviour
         {
             bandEffect = (controllerRef.KPH < 400) ? 300 - controllerRef.KPH /400 : 200;
 
-            camera.fieldOfView = fieldOfView;
+            cameraCar.fieldOfView = fieldOfView;
 
             newPos = target.position - (target.forward * cameraPos[locationIndicator].x) + (target.up * cameraPos[locationIndicator].y);
             transform.position = newPos * (1 - smoothTime) + transform.position * smoothTime;

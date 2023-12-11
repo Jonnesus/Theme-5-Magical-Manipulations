@@ -16,7 +16,7 @@ public class controller : MonoBehaviour
     public driveType drive;
 
     //scripts ->
-    private engineAudio audio;
+    private engineAudio audioCar;
     private inputManagerCar IM;
     private wheelsManager wheelsmanager;
 
@@ -67,7 +67,7 @@ public class controller : MonoBehaviour
 
     private bool reverse = false;
     private bool lightsFlag;
-    private bool grounded;
+    //private bool grounded;
     private bool engineLerp;
     private bool gearUp;
     private bool gearDown;
@@ -106,9 +106,9 @@ public class controller : MonoBehaviour
 
     void Audio()
     {
-        audio.totalPower = totalPower;
-        audio.engineRPM = engineRPM;
-        audio.engineLerp = engineLerp;
+        audioCar.totalPower = totalPower;
+        audioCar.engineRPM = engineRPM;
+        audioCar.engineLerp = engineLerp;
     }
 
     private void activateLights()
@@ -190,7 +190,7 @@ public class controller : MonoBehaviour
             gearNum  = gearNum +1;
             gearChangeRate = Time.time + 1f/3f ;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 2000 : 700));
-            audio.DownShift();
+            audioCar.DownShift();
         }
 
         if (gearDown == true && gearNum >= 1  && Time.time >= gearChangeRate)
@@ -198,7 +198,7 @@ public class controller : MonoBehaviour
             gearChangeRate = Time.time + 1f/3f;
             gearNum --;
             setEngineLerp(engineRPM - ( engineRPM > 1500 ? 1500 : 700));
-            audio.DownShift();
+            audioCar.DownShift();
         }  
     }
 
@@ -210,7 +210,7 @@ public class controller : MonoBehaviour
         if (engineRPM > maxRPM && gearNum < gears.Length-1 && !reverse && Time.time >= gearChangeRate && KPH >55)
         {
             gearNum ++;
-            audio.DownShift();
+            audioCar.DownShift();
             setEngineLerp(engineRPM - (engineRPM / 3));
             gearChangeRate = Time.time + 1f/1f;
         }
@@ -305,7 +305,7 @@ public class controller : MonoBehaviour
     {
         IM = GetComponent<inputManagerCar>();
         rigidbody = GetComponent<Rigidbody>();
-        audio = GetComponent<engineAudio>();
+        audioCar = GetComponent<engineAudio>();
         wheelsmanager = GetComponent<wheelsManager>();
 
         if (steeringWheel != null)
@@ -315,7 +315,7 @@ public class controller : MonoBehaviour
         wheelSlip = new float[wheels.Length];
         rigidbody.centerOfMass = gameObject.transform.Find("centerOfMas").gameObject.transform.localPosition;   
 
-        audio.maxRPM = maxRPM;
+        audioCar.maxRPM = maxRPM;
     }
 
     private void addDownForce()
@@ -342,11 +342,11 @@ public class controller : MonoBehaviour
                 sidewaysFriction.stiffness = (IM.handbrake) ? .55f : SidewaysStifness;
                 wheels[i].sidewaysFriction = sidewaysFriction;
                 
-                grounded = true;
+                //grounded = true;
 
                 sum += Mathf.Abs(hit.sidewaysSlip);
             }
-            else grounded = false;
+            //else grounded = false;
 
             wheelSlip[i] = Mathf.Abs( hit.forwardSlip) + Mathf.Abs(hit.sidewaysSlip);
             sidewaysSlip[i] = Mathf.Abs(hit.sidewaysSlip);
