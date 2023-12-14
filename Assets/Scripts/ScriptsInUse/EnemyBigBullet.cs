@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BigBullet : MonoBehaviour
+public class EnemyBigBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float rotateSpeed = 200f;
@@ -13,18 +13,15 @@ public class BigBullet : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Enemy").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        transform.rotation = Quaternion.Euler(0, 0, 180);
+
     }
 
     private void FixedUpdate()
     {
         if (target == null)
-        {
-            if (GameObject.FindGameObjectWithTag("Enemy") == null)
-                Destroy(gameObject);
-            else
-                target = GameObject.FindGameObjectWithTag("Enemy").transform;
-        }
+            Destroy(gameObject);
         else
         {
             Vector2 direction = (Vector2)target.position - rb.position;
@@ -39,13 +36,10 @@ public class BigBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D hitInfo)
     {
-        EnemyTakeDamage enemy = hitInfo.collider.GetComponent<EnemyTakeDamage>();
+        PlayerHealth player = hitInfo.collider.GetComponent<PlayerHealth>();
 
-        if (enemy != null)
-            enemy.TakeDamage(random.Next(12, 25));
-
-        if (hitInfo.gameObject.tag == "Button")
-            Debug.Log("Button Hit");
+        if (player != null)
+            player.TakeDamage(random.Next(12, 25));
 
         Destroy(gameObject);
     }

@@ -16,6 +16,7 @@ public class EnemyTakeDamage : MonoBehaviour
 
     private void Die()
     {
+        Debug.Log("Enemy Killed");
         Destroy(gameObject);
     }
 }

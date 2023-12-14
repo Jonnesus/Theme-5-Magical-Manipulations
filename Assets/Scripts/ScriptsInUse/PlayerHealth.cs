@@ -3,10 +3,10 @@ using UnityEngine.EventSystems;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health;
+    public float health;
     public bool playerAlive = true;
 
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float maxHealth = 100;
     [SerializeField] private GameObject inGameMenuPanel;
     [SerializeField] private GameObject deathMenuPanel;
     [SerializeField] private GameObject restartButton;
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
         health = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
