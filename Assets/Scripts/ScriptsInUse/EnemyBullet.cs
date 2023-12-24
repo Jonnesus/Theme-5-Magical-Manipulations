@@ -13,7 +13,7 @@ public class EnemyBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         transform.rotation = Quaternion.Euler(0,0,90);
 
-        rb.velocity = Vector3.left * speed;
+        rb.velocity = Vector2.left * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D hitInfo)
