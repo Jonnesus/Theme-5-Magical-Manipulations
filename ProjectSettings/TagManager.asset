@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Button
   - Enemy
+  - PlayerFirePoint
+  - PlayerBullet
+  - EnemyBullet
+  - EnemyBigBullet
+  - DeathObject
+  - LevelPortal
   layers:
   - Default
   - TransparentFX

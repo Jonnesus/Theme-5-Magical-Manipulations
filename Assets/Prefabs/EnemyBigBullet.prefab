@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2450107224652441251}
   m_Layer: 7
   m_Name: EnemyBigBullet
-  m_TagString: Untagged
+  m_TagString: EnemyBigBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +130,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

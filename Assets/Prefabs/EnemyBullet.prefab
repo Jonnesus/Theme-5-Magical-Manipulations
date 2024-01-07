@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2760226352553648347}
   m_Layer: 7
   m_Name: EnemyBullet
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +130,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -163,4 +163,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9572e189f7afd15428216bb00d104b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  force: 10
+  player: {fileID: 0}
