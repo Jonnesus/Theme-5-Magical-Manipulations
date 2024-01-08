@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(InputManager))]
 public class PlayerController : MonoBehaviour, IPlayerController
 {
+    [HideInInspector] public bool facingRight = true;
+
     [SerializeField] private ScriptableStats stats;
     [SerializeField] private GameObject firePoint;
     private Rigidbody2D rb;
@@ -12,7 +14,6 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private FrameInput frameInput;
     private Vector2 frameVelocity;
     private bool cachedQueryStartInColliders;
-    private bool facingRight = true;
 
     #region Interface
 

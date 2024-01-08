@@ -11,6 +11,8 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject bigBulletPrefab;
 
+    [SerializeField] private PlayerController playerController;
+
     private float nextFireSmall = 0f;
     private float nextFireBig = 0f;
     private InputManager IM;
@@ -37,7 +39,10 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        if (playerController.facingRight)
+            Instantiate(bulletPrefab, firePoint.transform.position, Quaternion.Euler(0, 0, 270));
+        else
+            Instantiate(bulletPrefab, firePoint.transform.position, Quaternion.Euler(0, 0, 90));
     }
 
     private void ShootBig()

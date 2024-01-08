@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyFollowPlayer : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float rotateSpeed = 200f;
 
     private Rigidbody2D rb;
     private Transform target;

@@ -3,13 +3,17 @@ using UnityEngine.EventSystems;
 
 public class PlayerOutcomes : MonoBehaviour
 {
-    public bool portalReached = false;
+    [HideInInspector] public bool portalReached = false;
 
     [SerializeField] private MenuPortalController portalController;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private GameObject inGameMenuPanel;
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject bestTimeText;
+
+    [Header("Victory SFX")]
+    [SerializeField] private AudioClip victorySFX;
+    [SerializeField] private AudioSource audioSource;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,6 +28,7 @@ public class PlayerOutcomes : MonoBehaviour
     {
         if (collision.gameObject.tag == ("LevelPortal"))
         {
+            audioSource.PlayOneShot(victorySFX);
             portalReached = true;
             inGameMenuPanel.SetActive(false);
             portalController.portalMenuPanel.SetActive(true);

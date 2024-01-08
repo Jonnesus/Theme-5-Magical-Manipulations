@@ -11,6 +11,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject deathMenuPanel;
     [SerializeField] private GameObject restartButton;
 
+    [Header("Damage SFX")]
+    [SerializeField] private AudioClip[] damageSFX;
+    [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioSource audioSource;
+
     private void Start()
     {
         health = maxHealth;
@@ -18,10 +23,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        audioSource.PlayOneShot(damageSFX[Random.Range(0, damageSFX.Length)]);
         health -= damage;
         if (health <= 0)
         {
             Debug.Log("Player Dead");
+            audioSource.PlayOneShot(deathSFX);
             playerAlive = false;
             inGameMenuPanel.SetActive(false);
             deathMenuPanel.SetActive(true);
